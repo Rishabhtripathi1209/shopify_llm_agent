@@ -1,69 +1,41 @@
 # Shopify LLM Agent
 
-This project connects to Shopify to fetch order data and processes queries using a basic language model. It provides an API to query orders based on different filters.
+This project connects to the Shopify API, retrieves sales order data, and allows users to query this data using natural language processing (NLP) with OpenAI’s GPT model.
 
-## Installation
+## Setup
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/Rishabhtripathi1209/shopify_llm_agent.git
+    git clone https://github.com/your-username/shopify_llm_agent.git
     ```
 
-2. Create a virtual environment and activate it:
+2. Create and activate a virtual environment:
     ```bash
     python -m venv venv
-    venv\Scripts\activate  # Windows
     source venv/bin/activate  # macOS/Linux
+    venv\Scripts\activate     # Windows
     ```
 
-3. Install the required dependencies:
+3. Install dependencies:
     ```bash
     pip install -r requirements.txt
     ```
 
-4. Run the FastAPI application:
+4. Set up your **Shopify API credentials** and **OpenAI API key** in the respective files:
+    - `shopify_client.py`: Set your `SHOPIFY_API_KEY`, `SHOPIFY_PASSWORD`, and `SHOPIFY_STORE_URL`.
+    - `llm_query_engine.py`: Set your `openai.api_key`.
+
+5. Run the FastAPI server:
     ```bash
     uvicorn main:app --reload
     ```
 
-5. Access the API at `http://127.0.0.1:8000`.
+6. Access the application at [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
-## Endpoints
+## Example Queries
 
-- `POST /query`: Queries sales data based on the request body.
-    - **Request**:
-    ```json
-    {
-      "query": "Get all shipped orders from California with amount > 100"
-    }
-    ```
-
-    - **Response**:
-    ```json
-    {
-      "query": "Get all shipped orders from California with amount > 100",
-      "filters": {
-        "region": "California",
-        "min_amount": 100
-      },
-      "results": [
-        {
-          "id": 1,
-          "amount": 120,
-          "state": "shipped",
-          "region": "California",
-          "date": "2024-03-15"
-        },
-        {
-          "id": 3,
-          "amount": 250,
-          "state": "shipped",
-          "region": "California",
-          "date": "2024-03-10"
-        }
-      ]
-    }
-    ```
+- "Show me all orders from California over $100"
+- "How many orders were shipped to California in March?"
 
 ## License
 
